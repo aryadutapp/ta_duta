@@ -83,15 +83,43 @@
   <figcaption class="mt-9 text-sm text-center text-gray-500 dark:text-gray-400">Metode Training</figcaption>
 </figure>
 
-<section class="bg-white text-left mx-2"><div class="mx-auto max-w-screen-md px-4 pb-8 lg:py-12"><div class="flex flex-col space-y-4 space-y-reverse"><h1 class="order-last md:text-lg sm:text-md text-gray-700">Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.</h1></div><div class="mt-4"></div></div></section>
+
+<section class="bg-white text-left mx-10"><div class="mx-auto max-w-screen-md px-4 pb-8 lg:py-12"><div class="flex flex-col space-y-4 space-y-reverse">
+  <ul class="list-disc md:text-lg sm:text-md text-gray-700 mb-4">
+    <li class="mb-4"><p class="font-bold">Pengumpulan Dataset</p>
+                  <p>Dataset yang digunakan dalam penelitian ini menggunakan format Alpaca, yang terdiri dari instruksi, input, dan output. Instruksi dalam dataset ini mengandung konteks grounding yang mencakup seluruh informasi lingkungan yang relevan, fungsi-fungsi robot yang dapat diakses, serta aturan-aturan yang diperlukan untuk menghasilkan output yang diinginkan. Konteks grounding ini penting untuk memastikan bahwa robot dapat memahami dan berinteraksi dengan lingkungannya secara efektif.</p>
+  
+  </li>
+    <!-- ... -->
+        <li class="mb-4"><p class="font-bold">Fine Tuning</p>
+                  <p>Proses fine tuning dilakukan dengan metode supervised fine tuning menggunakan parameter Efficient Fine Tuning (PEFT). Dalam hal ini, kami menggunakan teknik Low-Rank Adaptation (LoRA) yang diterapkan melalui library Unsloth. Penggunaan LoRA memungkinkan kami untuk meningkatkan performa model dengan signifikan sambil meminimalkan penggunaan memori dan mempercepat proses pelatihan. Metode ini terbukti efektif dalam mengadaptasi model large language model (LLM) untuk tugas-tugas spesifik tanpa memerlukan sumber daya komputasi yang besar.</p>
+  
+  
+  
+  </li>
+  
+  <li><p class="font-bold">Evaluasi Metrik</p>
+  
+  <p>Evaluasi performa model dilakukan menggunakan metrik Exact Match. Metrik ini mengukur sejauh mana output yang dihasilkan oleh model sesuai dengan output yang diharapkan secara tepat. Penggunaan Exact Match sebagai metrik evaluasi memberikan gambaran yang jelas mengenai akurasi model dalam memahami instruksi dan menghasilkan respons yang benar sesuai dengan konteks yang diberikan.</p></li></ul></div><div class="mt-4"></div></div>
+</section>
+
 
 <figure class="max-w-xl mx-auto mb-8 md:mb-4 lg:mb-0 mx-4 px-6">
   <img class="h-auto max-w-full rounded-lg mx-auto border border-gray-200 rounded-lg shadow" src="./img/metode_implementasi.jpg" alt="image description">
   <figcaption class="mt-9 text-sm text-center text-gray-500 dark:text-gray-400">Metode Implementasi</figcaption>
 </figure>
 
-<section class="bg-white text-left mx-2"><div class="mx-auto max-w-screen-md px-4 pb-8 lg:py-12"><div class="flex flex-col space-y-4 space-y-reverse"><h1 class="order-last md:text-lg sm:text-md text-gray-700">Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.</h1></div><div class="mt-4"></div></div></section>
-
+<section class="bg-white text-left mx-10"><div class="mx-auto max-w-screen-md px-4 pb-8 lg:py-12"><div class="flex flex-col space-y-4 space-y-reverse">
+  <ul class="list-decimal md:text-lg sm:text-md text-gray-700 mb-4">
+    <li class="mb-4"><p class="font-bold">Permintaan Pengguna</p>
+                  <p>Pengguna memulai dengan memberikan permintaan ke model bahasa. Sebagai contoh, permintaan tersebut bisa berupa instruksi sederhana seperti "pindahkan blok merah di atas blok biru". Instruksi ini merupakan perintah yang akan diproses oleh sistem untuk menghasilkan tindakan yang sesuai.</p></li>
+    <!-- ... -->
+        <li class="mb-4"><p class="font-bold">Penambahan Konteks Instruksi Grounding</p>
+                  <p>Setelah menerima permintaan dari pengguna, sistem akan mengirimkan permintaan tersebut beserta konteks instruksi grounding yang relevan. Konteks ini mencakup informasi lingkungan yang diperoleh dari sensor multimodal, seperti kamera, LIDAR, atau sensor lainnya yang digunakan oleh robot. Selain itu, konteks ini juga meliputi fungsi-fungsi robot yang dapat diakses, seperti gerakan lengan robot, kemampuan pengenalan objek, serta constrain lainnya yang mungkin mempengaruhi eksekusi tugas, seperti batasan fisik atau aturan keselamatan.</p></li>
+  
+  <li><p class="font-bold">Output Rencana Robot</p>
+                  <p>Model bahasa besar (LLM) kemudian akan memproses permintaan dan konteks instruksi grounding untuk menghasilkan output rencana robot. Output ini dihasilkan dalam format JSON yang terstruktur, yang berisi langkah-langkah spesifik yang harus diikuti oleh robot untuk melaksanakan tugas yang diminta. Format JSON ini mencakup detail seperti koordinat target, urutan tindakan, dan parameter lain yang diperlukan untuk kontrol robot. Output JSON ini kemudian digunakan sebagai input untuk sistem kontrol robot, yang akan menerjemahkan rencana tersebut menjadi aksi nyata yang dilakukan oleh robot.</p></li></ul></div><div class="mt-4"></div></div>
+</section>
 
 
 
