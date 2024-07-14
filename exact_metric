@@ -1,0 +1,56 @@
+import json
+from typing import List, Dict
+
+def exact_match(prediction: str, ground_truth: str) -> bool:
+    """
+    Compare the predicted response with the ground truth response.
+    
+    Args:
+    - prediction (str): The model's predicted response as a JSON string.
+    - ground_truth (str): The expected response as a JSON string.
+    
+    Returns:
+    - bool: True if the responses match exactly, False otherwise.
+    """
+    pred_actions = json.loads(prediction).get("actions", [])
+    gt_actions = json.loads(ground_truth).get("actions", [])
+    
+    return pred_actions == gt_actions
+
+def evaluate_dataset(dataset: List[Dict[str, str]]) -> float:
+    """
+    Evaluate the exact match metric on a dataset.
+    
+    Args:
+    - dataset (List[Dict[str, str]]): A list of dictionaries containing 'input' and 'response' keys.
+    
+    Returns:
+    - float: The exact match accuracy.
+    """
+    correct_predictions = 0
+    total_predictions = len(dataset)
+    
+    for data in dataset:
+        input_text = data['input']
+        ground_truth = data['response']
+        
+        # Assume inferrence is a function that takes input_text and returns the model's prediction
+        prediction = inferrence(input_text)
+        
+        if exact_match(prediction, ground_truth):
+            correct_predictions += 1
+    
+    return correct_predictions / total_predictions
+
+# Example dataset
+dataset = [
+    {
+        "input": "letakkan balok biru ke posisi depan",
+        "response": '{"actions": [{"command": "move_to", "parameters": {"x": 152.76, "y": 158.92, "z": 6}}, {"command": "suction_cup", "parameters": {"action": "on"}}, {"command": "move", "parameters": {"direction": "depan"}}, {"command": "suction_cup", "parameters": {"action": "off"}}]}'
+    },
+    # Add more data entries here
+]
+
+# Evaluate the dataset
+accuracy = evaluate_dataset(dataset)
+print(f"Exact match accuracy: {accuracy * 100:.2f}%")
