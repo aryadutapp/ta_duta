@@ -1,5 +1,5 @@
 import json
-from typing import List, Dict
+from datasets import load_dataset
 
 def exact_match(prediction: str, ground_truth: str) -> bool:
     """
@@ -17,12 +17,12 @@ def exact_match(prediction: str, ground_truth: str) -> bool:
     
     return pred_actions == gt_actions
 
-def evaluate_dataset(dataset: List[Dict[str, str]]) -> float:
+def evaluate_dataset(dataset) -> float:
     """
     Evaluate the exact match metric on a dataset.
     
     Args:
-    - dataset (List[Dict[str, str]]): A list of dictionaries containing 'input' and 'response' keys.
+    - dataset: A Hugging Face dataset containing 'input' and 'response' columns.
     
     Returns:
     - float: The exact match accuracy.
@@ -42,14 +42,8 @@ def evaluate_dataset(dataset: List[Dict[str, str]]) -> float:
     
     return correct_predictions / total_predictions
 
-# Example dataset
-dataset = [
-    {
-        "input": "letakkan balok biru ke posisi depan",
-        "response": '{"actions": [{"command": "move_to", "parameters": {"x": 152.76, "y": 158.92, "z": 6}}, {"command": "suction_cup", "parameters": {"action": "on"}}, {"command": "move", "parameters": {"direction": "depan"}}, {"command": "suction_cup", "parameters": {"action": "off"}}]}'
-    },
-    # Add more data entries here
-]
+# Load the validation dataset from Hugging Face
+dataset = load_dataset("your_dataset_name", split="validation")
 
 # Evaluate the dataset
 accuracy = evaluate_dataset(dataset)
